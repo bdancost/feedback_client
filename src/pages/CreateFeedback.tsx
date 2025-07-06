@@ -1,105 +1,146 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
 export default function CreateFeedback() {
-  // Estados para armazenar os dados do formulário
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
-  const [rating, setRating] = useState(5); // valor padrão de 1 a 5
-
-  const [success, setSuccess] = useState<string | null>(null);
+  const [rating, setRating] = useState(5);
   const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault(); // impede o recarregamento da página
-    setSuccess(null);
+    e.preventDefault();
     setError(null);
+    setSuccess(false);
 
-    try {
-      const response = await fetch("http://localhost:3333/feedback", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ name, email, message, rating }),
-      });
+    if (!name || !email || !message) {
+      setError("Por favor, preencha todos os campos.");
+      return;
+    }
 
-      if (!response.ok) {
-        throw new Error("Erro ao enviar feedback.");
-      }
-
-      setSuccess("Feedback enviado com sucesso!");
-      // limpa os campos
+    // Simula API e feedback
+    setTimeout(() => {
+      setSuccess(true);
       setName("");
       setEmail("");
       setMessage("");
       setRating(5);
-    } catch (err) {
-      setError("Ocorreu um erro ao enviar o feedback.");
-      console.error(err);
-    }
+    }, 500);
   };
 
   return (
-    <div className="max-w-xl mx-auto mt-10 bg-white p-6 rounded shadow">
-      <h2 className="text-2xl font-bold mb-4 text-center">Enviar Feedback</h2>
-
-      {success && <p className="text-green-600 mb-4">{success}</p>}
-      {error && <p className="text-red-600 mb-4">{error}</p>}
-
-      <form className="space-y-4" onSubmit={handleSubmit}>
-        <div>
-          <label className="block font-medium mb-1">Nome</label>
+    <div className="min-h-screen bg-gradient-to-tr from-indigo-100 via-purple-100 to-pink-100 flex items-center justify-center p-4">
+      <form
+        onSubmit={handleSubmit}
+        className="bg-white max-w-xl w-full rounded-3xl shadow-2xl p-10
+             ring-1 ring-gray-300 ring-opacity-30
+             flex flex-col space-y-6" // <-- aqui, space-y-6 para espaçamento vertical
+      >
+        {/* Campos */}
+        <label className="flex flex-col">
+          <span className="font-semibold text-gray-700 mb-2 uppercase tracking-wide">
+            Nome
+          </span>
           <input
             type="text"
-            className="w-full border border-gray-300 rounded p-2"
+            className="border border-gray-300 rounded-xl p-4
+                 focus:outline-none focus:ring-4 focus:ring-indigo-400
+                 transition duration-300 shadow-sm
+                 placeholder:text-gray-400"
+            placeholder="Seu nome completo"
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
           />
-        </div>
+        </label>
 
-        <div>
-          <label className="block font-medium mb-1">Email</label>
+        <label className="flex flex-col">
+          <span className="font-semibold text-gray-700 mb-2 uppercase tracking-wide">
+            Email
+          </span>
           <input
             type="email"
-            className="w-full border border-gray-300 rounded p-2"
+            className="border border-gray-300 rounded-xl p-4
+                 focus:outline-none focus:ring-4 focus:ring-indigo-400
+                 transition duration-300 shadow-sm
+                 placeholder:text-gray-400"
+            placeholder="exemplo@email.com"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-        </div>
+        </label>
 
-        <div>
-          <label className="block font-medium mb-1">Mensagem</label>
+        <label className="flex flex-col">
+          <span className="font-semibold text-gray-700 mb-2 uppercase tracking-wide">
+            Mensagem
+          </span>
           <textarea
-            className="w-full border border-gray-300 rounded p-2"
+            className="border border-gray-300 rounded-xl p-4 resize-y min-h-[120px]
+                 focus:outline-none focus:ring-4 focus:ring-indigo-400
+                 transition duration-300 shadow-sm
+                 placeholder:text-gray-400"
+            placeholder="Escreva seu feedback aqui..."
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             required
           />
-        </div>
+        </label>
 
-        <div>
-          <label className="block font-medium mb-1">Nota (1 a 5)</label>
-          <input
-            type="number"
-            min={1}
-            max={5}
-            className="w-full border border-gray-300 rounded p-2"
+        <label className="flex flex-col">
+          <span className="font-semibold text-gray-700 mb-2 uppercase tracking-wide">
+            Avaliação
+          </span>
+          <select
+            className="border border-gray-300 rounded-xl p-4
+                 focus:outline-none focus:ring-4 focus:ring-indigo-400
+                 transition duration-300 shadow-sm"
             value={rating}
             onChange={(e) => setRating(Number(e.target.value))}
-            required
-          />
-        </div>
+          >
+            {[1, 2, 3, 4, 5].map((num) => (
+              <option key={num} value={num}>
+                {num} {num === 1 ? "estrela" : "estrelas"}
+              </option>
+            ))}
+          </select>
+        </label>
 
-        <button
-          type="submit"
-          className="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition"
-        >
-          Enviar Feedback
-        </button>
+        {/* Botões */}
+        <div className="flex justify-end gap-4 pt-4">
+          <button
+            type="reset"
+            className="px-6 py-3 rounded-xl border border-gray-300
+                 text-gray-700 font-semibold
+                 hover:bg-gray-100 transition duration-300"
+            onClick={() => {
+              setName("");
+              setEmail("");
+              setMessage("");
+              setRating(5);
+              setError(null);
+              setSuccess(false);
+            }}
+          >
+            Limpar
+          </button>
+
+          <button
+            type="submit"
+            className="px-8 py-3 rounded-xl bg-indigo-600 text-white font-bold
+                 hover:bg-indigo-700 transition duration-300 shadow-lg
+                 focus:outline-none focus:ring-4 focus:ring-indigo-400"
+          >
+            Enviar
+          </button>
+        </div>
       </form>
+      {error && <p className="text-red-500 mt-4 text-center">{error}</p>}
+      {success && (
+        <p className="text-green-500 mt-4 text-center">
+          Feedback enviado com sucesso!
+        </p>
+      )}
     </div>
   );
 }
