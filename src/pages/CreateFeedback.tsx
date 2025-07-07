@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import InputField from "../components/InputField";
+import TextareaField from "../components/TextareaField";
+import SelectField from "../components/SelectField";
 
 export default function CreateFeedback() {
   const [name, setName] = useState("");
@@ -18,7 +21,7 @@ export default function CreateFeedback() {
       return;
     }
 
-    // Simula API e feedback
+    // Simula API
     setTimeout(() => {
       setSuccess(true);
       setName("");
@@ -32,87 +35,46 @@ export default function CreateFeedback() {
     <div className="min-h-screen bg-gradient-to-tr from-indigo-100 via-purple-100 to-pink-100 flex items-center justify-center p-4">
       <form
         onSubmit={handleSubmit}
-        className="bg-white max-w-xl w-full rounded-3xl shadow-2xl p-10
-             ring-1 ring-gray-300 ring-opacity-30
-             flex flex-col space-y-6" // <-- aqui, space-y-6 para espaçamento vertical
+        className="bg-white max-w-xl w-full rounded-3xl shadow-2xl p-10 ring-1 ring-gray-300 ring-opacity-30 flex flex-col space-y-6"
       >
-        {/* Campos */}
-        <label className="flex flex-col">
-          <span className="font-semibold text-gray-700 mb-2 uppercase tracking-wide">
-            Nome
-          </span>
-          <input
-            type="text"
-            className="border border-gray-300 rounded-xl p-4
-                 focus:outline-none focus:ring-4 focus:ring-indigo-400
-                 transition duration-300 shadow-sm
-                 placeholder:text-gray-400"
-            placeholder="Seu nome completo"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
-        </label>
+        {/* Campos usando componentes personalizados */}
+        <InputField
+          label="Nome"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          placeholder="Seu nome completo"
+          required
+        />
 
-        <label className="flex flex-col">
-          <span className="font-semibold text-gray-700 mb-2 uppercase tracking-wide">
-            Email
-          </span>
-          <input
-            type="email"
-            className="border border-gray-300 rounded-xl p-4
-                 focus:outline-none focus:ring-4 focus:ring-indigo-400
-                 transition duration-300 shadow-sm
-                 placeholder:text-gray-400"
-            placeholder="exemplo@email.com"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </label>
+        <InputField
+          label="Email"
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="exemplo@email.com"
+          required
+        />
 
-        <label className="flex flex-col">
-          <span className="font-semibold text-gray-700 mb-2 uppercase tracking-wide">
-            Mensagem
-          </span>
-          <textarea
-            className="border border-gray-300 rounded-xl p-4 resize-y min-h-[120px]
-                 focus:outline-none focus:ring-4 focus:ring-indigo-400
-                 transition duration-300 shadow-sm
-                 placeholder:text-gray-400"
-            placeholder="Escreva seu feedback aqui..."
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            required
-          />
-        </label>
+        <TextareaField
+          label="Mensagem"
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          placeholder="Escreva seu feedback aqui..."
+          required
+        />
 
-        <label className="flex flex-col">
-          <span className="font-semibold text-gray-700 mb-2 uppercase tracking-wide">
-            Avaliação
-          </span>
-          <select
-            className="border border-gray-300 rounded-xl p-4
-                 focus:outline-none focus:ring-4 focus:ring-indigo-400
-                 transition duration-300 shadow-sm"
-            value={rating}
-            onChange={(e) => setRating(Number(e.target.value))}
-          >
-            {[1, 2, 3, 4, 5].map((num) => (
-              <option key={num} value={num}>
-                {num} {num === 1 ? "estrela" : "estrelas"}
-              </option>
-            ))}
-          </select>
-        </label>
+        <SelectField
+          label="Avaliação"
+          options={[1, 2, 3, 4, 5]}
+          value={rating}
+          onChange={(e) => setRating(Number(e.target.value))}
+        />
 
         {/* Botões */}
         <div className="flex justify-end gap-4 pt-4">
           <button
             type="reset"
-            className="px-6 py-3 rounded-xl border border-gray-300
-                 text-gray-700 font-semibold
-                 hover:bg-gray-100 transition duration-300"
+            className="px-6 py-3 rounded-xl border border-gray-300 text-gray-700 font-semibold hover:bg-gray-100 transition duration-300"
             onClick={() => {
               setName("");
               setEmail("");
@@ -127,20 +89,20 @@ export default function CreateFeedback() {
 
           <button
             type="submit"
-            className="px-8 py-3 rounded-xl bg-indigo-600 text-white font-bold
-                 hover:bg-indigo-700 transition duration-300 shadow-lg
-                 focus:outline-none focus:ring-4 focus:ring-indigo-400"
+            className="px-8 py-3 rounded-xl bg-indigo-600 text-white font-bold hover:bg-indigo-700 transition duration-300 shadow-lg focus:outline-none focus:ring-4 focus:ring-indigo-400"
           >
             Enviar
           </button>
         </div>
+
+        {/* Mensagens de status */}
+        {error && <p className="text-red-500 mt-4 text-center">{error}</p>}
+        {success && (
+          <p className="text-green-500 mt-4 text-center">
+            Feedback enviado com sucesso!
+          </p>
+        )}
       </form>
-      {error && <p className="text-red-500 mt-4 text-center">{error}</p>}
-      {success && (
-        <p className="text-green-500 mt-4 text-center">
-          Feedback enviado com sucesso!
-        </p>
-      )}
     </div>
   );
 }
