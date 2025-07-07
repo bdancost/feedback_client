@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import InputField from "../components/InputField";
 import TextareaField from "../components/TextareaField";
 import SelectField from "../components/SelectField";
@@ -21,7 +21,6 @@ export default function CreateFeedback() {
       return;
     }
 
-    // Simula API
     setTimeout(() => {
       setSuccess(true);
       setName("");
@@ -31,50 +30,72 @@ export default function CreateFeedback() {
     }, 500);
   };
 
+  const ratingOptions = [
+    { value: 1, label: "1 estrela" },
+    { value: 2, label: "2 estrelas" },
+    { value: 3, label: "3 estrelas" },
+    { value: 4, label: "4 estrelas" },
+    { value: 5, label: "5 estrelas" },
+  ];
+
   return (
     <div className="min-h-screen bg-gradient-to-tr from-indigo-100 via-purple-100 to-pink-100 flex items-center justify-center p-4">
       <form
         onSubmit={handleSubmit}
-        className="bg-white max-w-xl w-full rounded-3xl shadow-2xl p-10 ring-1 ring-gray-300 ring-opacity-30 flex flex-col space-y-6"
+        className="bg-white max-w-lg w-full rounded-2xl shadow-xl p-8"
       >
-        {/* Campos usando componentes personalizados */}
-        <InputField
-          label="Nome"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          placeholder="Seu nome completo"
-          required
-        />
+        <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">
+          Deixe seu Feedback
+        </h2>
 
-        <InputField
-          label="Email"
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="exemplo@email.com"
-          required
-        />
+        {error && (
+          <p className="text-red-500 bg-red-100 p-2 rounded text-sm text-center mb-4">
+            {error}
+          </p>
+        )}
+        {success && (
+          <p className="text-green-600 bg-green-100 p-2 rounded text-sm text-center mb-4">
+            Feedback enviado com sucesso!
+          </p>
+        )}
 
-        <TextareaField
-          label="Mensagem"
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          placeholder="Escreva seu feedback aqui..."
-          required
-        />
+        {/* 🔥 CORPO DO FORMULÁRIO */}
+        <div className="flex flex-col space-y-6">
+          <InputField
+            label="Nome"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Seu nome completo"
+          />
 
-        <SelectField
-          label="Avaliação"
-          options={[1, 2, 3, 4, 5]}
-          value={rating}
-          onChange={(e) => setRating(Number(e.target.value))}
-        />
+          <InputField
+            label="Email"
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="exemplo@email.com"
+          />
 
-        {/* Botões */}
-        <div className="flex justify-end gap-4 pt-4">
+          <TextareaField
+            label="Mensagem"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            placeholder="Escreva seu feedback aqui..."
+          />
+
+          <SelectField
+            label="Avaliação"
+            value={rating}
+            onChange={(e) => setRating(Number(e.target.value))}
+            options={ratingOptions}
+          />
+        </div>
+
+        {/* 🔘 BOTÕES */}
+        <div className="flex justify-between mt-8">
           <button
             type="reset"
-            className="px-6 py-3 rounded-xl border border-gray-300 text-gray-700 font-semibold hover:bg-gray-100 transition duration-300"
+            className="px-6 py-2 rounded-md border border-gray-300 text-gray-700 hover:bg-gray-100 transition font-semibold"
             onClick={() => {
               setName("");
               setEmail("");
@@ -89,19 +110,11 @@ export default function CreateFeedback() {
 
           <button
             type="submit"
-            className="px-8 py-3 rounded-xl bg-indigo-600 text-white font-bold hover:bg-indigo-700 transition duration-300 shadow-lg focus:outline-none focus:ring-4 focus:ring-indigo-400"
+            className="px-6 py-2 rounded-md bg-indigo-600 text-white font-semibold hover:bg-indigo-700 transition shadow-md"
           >
             Enviar
           </button>
         </div>
-
-        {/* Mensagens de status */}
-        {error && <p className="text-red-500 mt-4 text-center">{error}</p>}
-        {success && (
-          <p className="text-green-500 mt-4 text-center">
-            Feedback enviado com sucesso!
-          </p>
-        )}
       </form>
     </div>
   );

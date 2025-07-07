@@ -1,8 +1,13 @@
 import React from "react";
 
+type Option = {
+  value: number;
+  label: string;
+};
+
 type Props = {
   label: string;
-  options: number[];
+  options: Option[];
   value: number;
   onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 };
@@ -25,9 +30,9 @@ export default function SelectField({
           focus:outline-none focus:ring-4 focus:ring-indigo-400
           transition duration-300 shadow-sm"
       >
-        {options.map((num) => (
-          <option key={num} value={num}>
-            {num} {num === 1 ? "estrela" : "estrelas"}
+        {options.map((option) => (
+          <option key={option.value} value={option.value}>
+            {option.label}
           </option>
         ))}
       </select>
