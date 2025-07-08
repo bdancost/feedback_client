@@ -1,34 +1,24 @@
-import { useState } from "react";
 import InputField from "../components/InputField";
 import TextareaField from "../components/TextareaField";
 import SelectField from "../components/SelectField";
+import { useFeedbackForm } from "../hooks/useFeedbackForm";
 
 export default function CreateFeedback() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
-  const [rating, setRating] = useState(5);
-  const [error, setError] = useState<string | null>(null);
-  const [success, setSuccess] = useState(false);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError(null);
-    setSuccess(false);
-
-    if (!name || !email || !message) {
-      setError("Por favor, preencha todos os campos.");
-      return;
-    }
-
-    setTimeout(() => {
-      setSuccess(true);
-      setName("");
-      setEmail("");
-      setMessage("");
-      setRating(5);
-    }, 500);
-  };
+  const {
+    name,
+    setName,
+    email,
+    setEmail,
+    message,
+    setMessage,
+    rating,
+    setRating,
+    error,
+    success,
+    loading,
+    handleSubmit,
+    resetForm,
+  } = useFeedbackForm();
 
   const ratingOptions = [
     { value: 1, label: "1 estrela" },
@@ -59,12 +49,7 @@ export default function CreateFeedback() {
           </p>
         )}
 
-        {/* 🔥 CORPO DO FORMULÁRIO */}
-        <div
-          className="flex flex-col space-y-6 border border-gray-300 rounded-xl p-4
-             focus:outline-none focus:ring-4 focus:ring-primary/50
-             transition duration-300 shadow-sm"
-        >
+        <div className="flex flex-col space-y-6 border border-gray-300 rounded-xl p-4 shadow-sm transition">
           <InputField
             label="Nome"
             value={name}
@@ -95,28 +80,22 @@ export default function CreateFeedback() {
           />
         </div>
 
-        {/* 🔘 BOTÕES */}
         <div className="flex justify-between mt-8">
           <button
             type="reset"
             className="px-6 py-2 rounded-md border border-gray-300 text-gray-700 hover:bg-gray-100 transition font-semibold"
-            onClick={() => {
-              setName("");
-              setEmail("");
-              setMessage("");
-              setRating(5);
-              setError(null);
-              setSuccess(false);
-            }}
+            onClick={resetForm}
+            disabled={loading}
           >
             Limpar
           </button>
 
           <button
             type="submit"
-            className="px-6 py-3 rounded-md bg-primary text-white font-semibold hover:bg-indigo-700 transition shadow-md"
+            className="px-6 py-3 rounded-md bg-primary text-white font-semibold hover:bg-indigo-700 transition shadow-md disabled:opacity-50"
+            disabled={loading}
           >
-            Enviar
+            {loading ? "Enviando..." : "Enviar"}
           </button>
         </div>
       </form>
