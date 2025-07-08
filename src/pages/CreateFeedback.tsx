@@ -44,7 +44,7 @@ export default function CreateFeedback() {
         onSubmit={handleSubmit}
         className="bg-white max-w-lg w-full rounded-2xl shadow-xl p-8"
       >
-        <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">
+        <h2 className="text-3xl font-heading text-primary text-gray-800 mb-8 text-center">
           Deixe seu Feedback
         </h2>
 
@@ -60,7 +60,11 @@ export default function CreateFeedback() {
         )}
 
         {/* 🔥 CORPO DO FORMULÁRIO */}
-        <div className="flex flex-col space-y-6">
+        <div
+          className="flex flex-col space-y-6 border border-gray-300 rounded-xl p-4
+             focus:outline-none focus:ring-4 focus:ring-primary/50
+             transition duration-300 shadow-sm"
+        >
           <InputField
             label="Nome"
             value={name}
@@ -110,7 +114,7 @@ export default function CreateFeedback() {
 
           <button
             type="submit"
-            className="px-6 py-2 rounded-md bg-indigo-600 text-white font-semibold hover:bg-indigo-700 transition shadow-md"
+            className="px-6 py-3 rounded-md bg-primary text-white font-semibold hover:bg-indigo-700 transition shadow-md"
           >
             Enviar
           </button>
