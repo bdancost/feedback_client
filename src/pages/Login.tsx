@@ -1,59 +1,74 @@
 import { useState } from "react";
-import { useAuth } from "../context/useAuth";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 export default function Login() {
-  const { login } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
+  const navigate = useNavigate();
+  const auth = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
+
     try {
-      await login(email, password);
-      // redirecionar, por exemplo, para /dashboard
+      await auth?.login(email, password);
+      navigate("/dashboard");
     } catch (err) {
       console.error("Erro ao fazer login:", err);
-      setError("Falha ao fazer login. Verifique seu email e senha.");
+      setError("Email ou senha inválidos.");
     }
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4">
       <form
         onSubmit={handleSubmit}
-        className="bg-white p-8 rounded shadow-md w-full max-w-md"
+        className="bg-white p-8 rounded-xl shadow-md w-full max-w-sm"
       >
-        <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
+        <h2 className="text-2xl font-bold mb-6 text-center text-indigo-700">
+          Login
+        </h2>
 
-        {error && <p className="text-red-500 mb-4">{error}</p>}
+        {error && (
+          <p className="text-red-600 text-sm text-center mb-4 bg-red-100 p-2 rounded">
+            {error}
+          </p>
+        )}
 
-        <label className="block mb-2">
-          Email
+        <div className="mb-4">
+          <label className="block mb-1 text-sm font-medium text-gray-700">
+            Email
+          </label>
           <input
             type="email"
-            className="w-full p-2 border rounded mt-1"
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            placeholder="admin@email.com"
             required
           />
-        </label>
+        </div>
 
-        <label className="block mb-4">
-          Senha
+        <div className="mb-6">
+          <label className="block mb-1 text-sm font-medium text-gray-700">
+            Senha
+          </label>
           <input
             type="password"
-            className="w-full p-2 border rounded mt-1"
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            placeholder="123456"
             required
           />
-        </label>
+        </div>
 
         <button
           type="submit"
-          className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
+          className="w-full bg-indigo-600 text-white font-semibold py-2 rounded-md hover:bg-indigo-700 transition"
         >
           Entrar
         </button>

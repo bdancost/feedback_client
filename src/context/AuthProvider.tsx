@@ -1,12 +1,6 @@
 import React, { useState } from "react";
 import { AuthContext } from "./AuthContext";
-import type { AuthContextType } from "./AuthContext";
-
-export type User = {
-  id: number;
-  name: string;
-  email: string;
-};
+import type { User, AuthContextType } from "./AuthContext";
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
@@ -29,10 +23,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 
       const data = await response.json();
 
-      // Salva o token no localStorage
       localStorage.setItem("token", data.token);
 
-      // Define o usuário no contexto
       setUser(data.user);
     } catch (error) {
       console.error("Erro no login:", error);
@@ -42,7 +34,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const logout = () => {
     setUser(null);
-    localStorage.removeItem("token"); // remove token ao deslogar
+    localStorage.removeItem("token");
   };
 
   const value: AuthContextType = { user, login, logout };

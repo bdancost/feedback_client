@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { createContext, useContext } from "react";
 
 export type User = {
   id: number;
@@ -12,6 +12,7 @@ export type AuthContextType = {
   logout: () => void;
 };
 
-export const AuthContext = createContext<AuthContextType | undefined>(
-  undefined
-);
+export const AuthContext = createContext<AuthContextType | null>(null);
+
+// Hook personalizado
+export const useAuth = () => useContext(AuthContext);
