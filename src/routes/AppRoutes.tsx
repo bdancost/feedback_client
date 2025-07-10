@@ -24,7 +24,7 @@ export const router = createBrowserRouter([
     ),
     children: [
       {
-        index: true,
+        path: "feedback/create",
         element: <CreateFeedback />,
       },
       {
