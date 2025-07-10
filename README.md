@@ -37,7 +37,7 @@ src/
 
 1. Clone o repositório:
 
-git clone https://github.com/seu-usuario/feedbackhub-frontend.git
+git clone https://github.com/bdancost/feedback_client.git
 cd feedbackhub-frontend
 
 2. Instale as dependências:
