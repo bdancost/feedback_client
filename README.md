@@ -54,7 +54,7 @@ VITE_API_URL=http://localhost:3333
 npm run dev
 Acesse http://localhost:5173
 
-✅ Funcionalidades
+ ✅## Funcionalidades
  Registro de novo usuário
 
  Login com autenticação JWT
@@ -69,7 +69,7 @@ Acesse http://localhost:5173
 
  Listagem e edição de feedbacks (em andamento)
 
-🔐 Autenticação
+🔐## Autenticação
 O contexto AuthContext gerencia:
 
 token JWT
@@ -80,14 +80,12 @@ persistência em localStorage
 
 proteção de rotas com PrivateRoute
 
-🧪 Testes
+🧪## Testes
 (Adicione esta seção caso você implemente testes futuramente com Vitest, React Testing Library, etc.)
 
-✨ Contribuição
+✨## Contribuição
 Sinta-se livre para abrir issues, enviar PRs ou sugestões. Vamos construir juntos!
 
-📄 Licença
-Este projeto está sob a licença MIT. Veja o arquivo LICENSE para mais detalhes.
 
 💡 Autor
 Desenvolvido com 💙 por Daniel Fernandes
