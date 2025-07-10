@@ -1,69 +1,95 @@
-# React + TypeScript + Vite
+# 📬 FeedbackHub - Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Frontend moderno e responsivo do sistema **FeedbackHub**, uma plataforma que permite a coleta, visualização e gestão de feedbacks de usuários de forma simples e eficiente.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 📸 Preview
 
-## Expanding the ESLint configuration
+![Dashboard Preview](./public/preview-dashboard.png) <!-- Você pode colocar um print real do dashboard aqui -->
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## ⚙️ Tecnologias utilizadas
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+- ⚛️ **React** + **TypeScript**
+- 🎨 **TailwindCSS** (estilização moderna e responsiva)
+- 🔒 **JWT Auth** via `AuthContext`
+- 🧭 **React Router DOM** (roteamento e proteção de rotas)
+- 🧠 **React Hooks** (lógica e estados isolados)
+- 📦 **Vite** (build rápido)
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+---
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 📁 Estrutura de pastas
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+```bash
+src/
+├── components/       # Componentes reutilizáveis (InputField, Layout, etc.)
+├── hooks/            # Custom Hooks (ex: useFeedbackForm)
+├── pages/            # Páginas da aplicação (Login, Register, Dashboard, etc.)
+├── routes/           # Configuração de rotas privadas e públicas
+├── context/          # AuthContext para autenticação
+├── services/         # Comunicação com a API backend
+└── App.tsx           # Componente principal
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+🚀 Como rodar o projeto
+
+1. Clone o repositório:
+
+git clone https://github.com/seu-usuario/feedbackhub-frontend.git
+cd feedbackhub-frontend
+
+2. Instale as dependências:
+
+npm install
+
+3. Configure o ambiente:
+Crie um arquivo .env com a URL do backend:
+
+VITE_API_URL=http://localhost:3333
+
+4. Rode o projeto localmente:
+
+npm run dev
+Acesse http://localhost:5173
+
+✅ Funcionalidades
+ Registro de novo usuário
+
+ Login com autenticação JWT
+
+ Redirecionamento automático pós-login
+
+ Criação de feedback com validação e notificação
+
+ Página de Dashboard moderna com navegação
+
+ Roteamento privado
+
+ Listagem e edição de feedbacks (em andamento)
+
+🔐 Autenticação
+O contexto AuthContext gerencia:
+
+token JWT
+
+usuário autenticado
+
+persistência em localStorage
+
+proteção de rotas com PrivateRoute
+
+🧪 Testes
+(Adicione esta seção caso você implemente testes futuramente com Vitest, React Testing Library, etc.)
+
+✨ Contribuição
+Sinta-se livre para abrir issues, enviar PRs ou sugestões. Vamos construir juntos!
+
+📄 Licença
+Este projeto está sob a licença MIT. Veja o arquivo LICENSE para mais detalhes.
+
+💡 Autor
+Desenvolvido com 💙 por Daniel Fernandes
+
 ```
