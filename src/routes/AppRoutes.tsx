@@ -5,6 +5,7 @@ import Dashboard from "../pages/Dashboard";
 import CreateFeedback from "../pages/CreateFeedback";
 import PrivateRoute from "./PrivateRoute";
 import Register from "../pages/Register";
+import MyFeedbacks from "../pages/MyFeedbacks";
 
 export const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ export const router = createBrowserRouter([
       {
         path: "dashboard",
         element: <Dashboard />,
+      },
+      {
+        path: "meus-feedbacks",
+        element: <MyFeedbacks />,
       },
       // outras rotas protegidas aqui
     ],

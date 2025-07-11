@@ -1,3 +1,5 @@
+import { api } from "./api";
+
 export async function sendFeedback(data: {
   name: string;
   email: string;
@@ -7,3 +9,8 @@ export async function sendFeedback(data: {
   console.log("Enviando feedback:", data); // <-- uso da variável
   return new Promise((resolve) => setTimeout(resolve, 1000));
 }
+
+export const getMyFeedbacks = async () => {
+  const response = await api.get("/feedback/my");
+  return response.data;
+};

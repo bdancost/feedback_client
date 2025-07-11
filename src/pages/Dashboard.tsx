@@ -19,12 +19,19 @@ export default function Dashboard() {
       </header>
 
       {/* Ações */}
-      <div className="mb-6 flex justify-end">
+      <div className="mb-6 flex flex-col sm:flex-row sm:justify-between gap-4">
         <button
           onClick={() => navigate("/feedback/create")}
           className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded-lg font-medium shadow transition"
         >
           + Criar novo feedback
+        </button>
+
+        <button
+          onClick={() => navigate("/meus-feedbacks")}
+          className="bg-white border px-4 py-2 rounded-md shadow hover:bg-gray-100 transition"
+        >
+          Ver meus feedbacks
         </button>
       </div>
 
