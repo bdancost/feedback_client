@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { sendFeedback } from "../services/feedbackService";
+import { useNavigate } from "react-router-dom";
 
 export function useFeedbackForm() {
   const [name, setName] = useState("");
@@ -9,6 +10,8 @@ export function useFeedbackForm() {
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  const navigate = useNavigate(); // ✅
 
   const resetForm = () => {
     setName("");
@@ -33,6 +36,12 @@ export function useFeedbackForm() {
     try {
       await sendFeedback({ name, email, message, rating });
       setSuccess(true);
+
+      // ✅ Redireciona após breve delay
+      setTimeout(() => {
+        navigate("/meus-feedbacks");
+      }, 1500);
+
       resetForm();
     } catch (err) {
       console.error("Erro ao enviar feedback:", err);

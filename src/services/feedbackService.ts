@@ -1,4 +1,4 @@
-import { api } from "./api";
+import api from "./api";
 
 export async function sendFeedback(data: {
   name: string;
@@ -10,7 +10,7 @@ export async function sendFeedback(data: {
   return new Promise((resolve) => setTimeout(resolve, 1000));
 }
 
-export const getMyFeedbacks = async () => {
+export async function getMyFeedbacks() {
   const response = await api.get("/feedback/my");
   return response.data;
-};
+}
