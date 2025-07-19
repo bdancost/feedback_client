@@ -20,7 +20,7 @@ Este é o frontend da plataforma FeedbackHub, feito com React e TypeScript para 
 ## 📦 Instalação
 
 ```bash
-git clone https://github.com/seu-usuario/feedbackhub.git
+git clone https://github.com/bdancost/feedback_client.git
 cd feedbackhub/feedback_client
 npm install
 ```
