@@ -1,93 +1,104 @@
-# 📬 FeedbackHub - Frontend
+# 🎨✨ FeedbackHub Client
 
-Frontend moderno e responsivo do sistema **FeedbackHub**, uma plataforma que permite a coleta, visualização e gestão de feedbacks de usuários de forma simples e eficiente.
-
----
-
-## 📸 Preview
-
-![Dashboard Preview](./public/preview-dashboard.png) <!-- Você pode colocar um print real do dashboard aqui -->
+Bem-vindo ao **FeedbackHub Client**!  
+Este é o frontend da plataforma FeedbackHub, feito com React e TypeScript para uma experiência moderna e responsiva.
 
 ---
 
-## ⚙️ Tecnologias utilizadas
+## 🌈 Tecnologias
 
 - ⚛️ **React** + **TypeScript**
-- 🎨 **TailwindCSS** (estilização moderna e responsiva)
-- 🔒 **JWT Auth** via `AuthContext`
-- 🧭 **React Router DOM** (roteamento e proteção de rotas)
-- 🧠 **React Hooks** (lógica e estados isolados)
-- 📦 **Vite** (build rápido)
+- 🎨 **TailwindCSS**
+- 🔒 **JWT Auth**
+- 🧭 **React Router DOM**
+- 🧠 **React Hooks**
+- 📦 **Vite**
+- 🧪 **Jest** (Testes)
 
 ---
 
-## 📁 Estrutura de pastas
+## 📦 Instalação
 
 ```bash
-src/
-├── components/       # Componentes reutilizáveis (InputField, Layout, etc.)
-├── hooks/            # Custom Hooks (ex: useFeedbackForm)
-├── pages/            # Páginas da aplicação (Login, Register, Dashboard, etc.)
-├── routes/           # Configuração de rotas privadas e públicas
-├── context/          # AuthContext para autenticação
-├── services/         # Comunicação com a API backend
-└── App.tsx           # Componente principal
-
-🚀 Como rodar o projeto
-
-1. Clone o repositório:
-
-git clone https://github.com/bdancost/feedback_client.git
-cd feedbackhub-frontend
-
-2. Instale as dependências:
-
+git clone https://github.com/seu-usuario/feedbackhub.git
+cd feedbackhub/feedback_client
 npm install
-
-3. Configure o ambiente:
-Crie um arquivo .env com a URL do backend:
-
-VITE_API_URL=http://localhost:3333
-
-4. Rode o projeto localmente:
-
-npm run dev
-Acesse http://localhost:5173
-
- ✅ Funcionalidades
- Registro de novo usuário
-
- Login com autenticação JWT
-
- Redirecionamento automático pós-login
-
- Criação de feedback com validação e notificação
-
- Página de Dashboard moderna com navegação
-
- Roteamento privado
-
- Listagem e edição de feedbacks (em andamento)
-
-🔐 Autenticação
-O contexto AuthContext gerencia:
-
-token JWT
-
-usuário autenticado
-
-persistência em localStorage
-
-proteção de rotas com PrivateRoute
-
-🧪 Testes
-(Adicione esta seção caso você implemente testes futuramente com Vitest, React Testing Library, etc.)
-
-✨ Contribuição
-Sinta-se livre para abrir issues, enviar PRs ou sugestões. Vamos construir juntos!
-
-
-💡 Autor
-Desenvolvido com 💙 por Daniel Fernandes
-
 ```
+
+---
+
+## ⚙️ Configuração
+
+1. (Opcional) Crie `.env`:
+
+   ```
+   VITE_API_URL=http://localhost:3333
+   ```
+
+2. Certifique-se que o backend está rodando.
+
+---
+
+## ▶️ Executando
+
+```bash
+npm run dev
+```
+
+Acesse: [http://localhost:5173](http://localhost:5173)
+
+---
+
+## 🖥️ Funcionalidades
+
+- 🔐 **Registro/Login**: Formulários com validação.
+- 📝 **Criação de Feedback**: Campos dinâmicos e validados.
+- 📋 **Listagem de Feedbacks**: Visualize seus feedbacks.
+- 🔒 **Roteamento Protegido**:  
+  ![Lock Animation](https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif)
+  Utiliza o componente `PrivateRoute` para proteger páginas sensíveis.
+- 📊 **Dashboard**: Estatísticas e visualização geral.
+- 📱 **Responsivo**: Interface adaptável a qualquer dispositivo.
+
+---
+
+## 🔗 Fluxo de Funcionamento
+
+1. **Usuário registra/login**  
+   &rarr; Token JWT salvo no localStorage.
+
+2. **Acesso a rotas protegidas**  
+   &rarr; `PrivateRoute` verifica autenticação.
+
+3. **Envio de feedback**  
+   &rarr; Dados validados e enviados ao backend.
+
+4. **Visualização/Edição/Exclusão**  
+   &rarr; Gerencie seus feedbacks facilmente.
+
+---
+
+## 📝 Exemplos
+
+- `src/routes/PrivateRoute.tsx`  
+  Protege rotas usando contexto de autenticação.
+
+- `src/pages/CreateFeedback.tsx`  
+  Formulário dinâmico para envio de feedback.
+
+---
+
+## 🖼️ Preview
+
+![Frontend Animation](https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif)
+
+---
+
+## 💡 Autor
+
+Desenvolvido por Daniel Fernandes  
+[GitHub](https://github.com/bdancost) | [LinkedIn](https://www.linkedin.com/in/daniel-fernandes1988/)
+
+---
+
+## 🎉 Use, contribua e compartilhe! 🚀
